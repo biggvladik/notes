@@ -19,16 +19,26 @@ class Data:
     def get_all_by_username(self,username:str):
 
         res = self.collection.find_one({"username": username},{'_id':0,'password':0})
+
         return res
 
 
 
- #   def create_account(self,username:str,email:str,password:str):
+    def create_account(self,username:str,email:str,password:str):
+        account = {
+            'username':username,
+            'email':email,
+            'password':password,
+            'notes': []
+        }
+
+        self.collection.insert_one(account)
 
 
 
 
-  #  def delete_account(self,username,password):
+    def delete_account(self,username,password):
+        self.collection.delete_one({'username':username,'password':password})
 
 
 
